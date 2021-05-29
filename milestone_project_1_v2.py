@@ -7,8 +7,8 @@
 6. Play again?
 """
 
-board = [" "]*10
-current_player = "player_1"
+board = ['-',' ',' ',' ',' ',' ',' ',' ',' ',' ']
+current_player = "Player_1"
 player_1_mark, player_2_mark = ("O","X")
 
 def display_board(board):
@@ -19,11 +19,21 @@ def display_board(board):
     print(board[7] + "|" + board[8] + "|" + board[9])
 
 def ask_player_1_input():
+    print("Player 1's turn")
     position = int(input("Please choose a number from 1-9: "))
+
+    while position not in range(1,10) or board[position] == "X" or board[position] == "O":
+        position = int(input("Please choose a number ONLY from 1-9: "))
+
     board[position] = "X"
 
 def ask_player_2_input():
+    print("Player 2's turn")
     position = int(input("Please choose a number from 1-9: "))
+
+    while position not in range(1,10) or board[position] == "X" or board[position] == "O":
+        position = int(input("Please choose a number ONLY from 1-9: "))
+
     board[position] = "O"
 
 def check_win():
@@ -46,41 +56,73 @@ def check_win():
     else:
         return False
 
-def replay():
-    if input("Type 'YES' to play again or 'NO' to quit: ") == 'YES':
-        game_on = True
+def check_tie():
+    if " " not in board:
+        return True
     else:
-        game_on = False
+        return False
 
-def play_game():
+def replay():
+    pass
 
-    current_player = 'player_1'
 
-    play_game = input('Enter "YES" to play or "NO" to quit: ')
-    if play_game.upper() == 'YES':
-        game_on = True
+def start_game():
 
-        while game_on:
+    current_player = 'Player_1'
+    play_game = ''
 
-            display_board(board)
+    print("Welcome to the Tic-Tac-Toe game!")
+    print("Rules: Enter numbers from 1-9 to mark the board!")
+    print(" ")
+    print("[1]|[2]|[3]")
+    print("---|---|----")
+    print("[4]|[5]|[6]")
+    print("---|---|----")
+    print("[7]|[8]|[9]")
+    print(" ")
 
-            if current_player == 'player_1':
-                ask_player_1_input()
-                if check_win() == True:
-                    print(current_player+" wins!")
-                    break
+
+    while not play_game == 'YES':
+        play_game = input('Enter "YES" to start: ').upper()
+        if play_game == 'YES':
+            game_on = True
+
+    while game_on:
+
+        display_board(board)
+
+        if current_player == 'Player_1':
+            ask_player_1_input()
+            if check_win() == True:
+                print(current_player+" wins!")
+                print("Match result: ")
+                display_board(board)
+                game_on = False
+
+            else:
+                if check_tie() == True:
+                    print("Tie!")
+                    display_board(board)
+                    game_on = False
+
                 else:
-                    current_player = 'player_2'
+                    current_player = 'Player_2'
 
-            elif current_player == 'player_2':
-                ask_player_2_input()
-                if check_win() == True:
-                    print(current_player + " wins!")
-                    break
+        elif current_player == 'Player_2':
+            ask_player_2_input()
+            if check_win() == True:
+                print(current_player + " wins!")
+                print("Match result: ")
+                display_board(board)
+                game_on = False
+
+            else:
+                if check_tie() == True:
+                    print("Tie!")
+                    display_board(board)
+                    game_on = False
+
                 else:
-                    current_player = 'player_1'
+                    current_player = 'Player_1'
 
-    elif play_game.lower() == 'no':
-        print("Thanks for stopping by!")
-
-play_game()
+start_game()
