@@ -12,27 +12,28 @@ current_player = "Player_1"
 player_1_mark, player_2_mark = ("O","X")
 
 def display_board(board):
-    print(board[1] + "|" + board[2] + "|" + board[3])
-    print("-----")
-    print(board[4] + "|" + board[5] + "|" + board[6])
-    print("-----")
-    print(board[7] + "|" + board[8] + "|" + board[9])
+    print("Game Board      Position Guide")
+    print("  " + board[1] + "|" + board[2] + "|" + board[3] + "             1|2|3")
+    print("  -----             -----")
+    print("  " + board[4] + "|" + board[5] + "|" + board[6] + "             4|5|6")
+    print("  -----             -----")
+    print("  " + board[7] + "|" + board[8] + "|" + board[9] + "             7|8|9")
 
 def ask_player_1_input():
-    print("Player 1's turn")
+    print("Player_1's turn, your mark is 'X'")
     position = int(input("Please choose a number from 1-9: "))
 
     while position not in range(1,10) or board[position] == "X" or board[position] == "O":
-        position = int(input("Please choose a number ONLY from 1-9: "))
+        position = int(input("Invalid number or placement, please try again: "))
 
     board[position] = "X"
 
 def ask_player_2_input():
-    print("Player 2's turn")
+    print("Player_2's turn, your mark is 'O'")
     position = int(input("Please choose a number from 1-9: "))
 
     while position not in range(1,10) or board[position] == "X" or board[position] == "O":
-        position = int(input("Please choose a number ONLY from 1-9: "))
+        position = int(input("Invalid number or placement, please try again: "))
 
     board[position] = "O"
 
@@ -72,15 +73,9 @@ def start_game():
     play_game = ''
 
     print("Welcome to the Tic-Tac-Toe game!")
-    print("Rules: Enter numbers from 1-9 to mark the board!")
+    print("How to play? : Enter numbers from 1-9 to place a mark on the 3x3 board!")
+    print("How to win?  : The first player to get 3 mark in a line wins!")
     print(" ")
-    print("[1]|[2]|[3]")
-    print("---|---|----")
-    print("[4]|[5]|[6]")
-    print("---|---|----")
-    print("[7]|[8]|[9]")
-    print(" ")
-
 
     while not play_game == 'YES':
         play_game = input('Enter "YES" to start: ').upper()
@@ -95,7 +90,6 @@ def start_game():
             ask_player_1_input()
             if check_win() == True:
                 print(current_player+" wins!")
-                print("Match result: ")
                 display_board(board)
                 game_on = False
 
@@ -112,7 +106,6 @@ def start_game():
             ask_player_2_input()
             if check_win() == True:
                 print(current_player + " wins!")
-                print("Match result: ")
                 display_board(board)
                 game_on = False
 
