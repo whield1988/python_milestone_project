@@ -89,14 +89,14 @@ def start_game():
         if current_player == 'Player_1':
             ask_player_1_input()
             if check_win() == True:
-                print(current_player+" wins!")
                 display_board(board)
+                print(current_player+" wins!")
                 game_on = False
 
             else:
                 if check_tie() == True:
-                    print("Tie!")
                     display_board(board)
+                    print("Tie!")
                     game_on = False
 
                 else:
@@ -105,14 +105,14 @@ def start_game():
         elif current_player == 'Player_2':
             ask_player_2_input()
             if check_win() == True:
-                print(current_player + " wins!")
                 display_board(board)
+                print(current_player + " wins!")
                 game_on = False
 
             else:
                 if check_tie() == True:
-                    print("Tie!")
                     display_board(board)
+                    print("Tie!")
                     game_on = False
 
                 else:
